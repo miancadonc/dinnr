@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Recipe Books</title>
+    </head>
+    <body>
+    <nav>
+      <% if logged_in? %>
+
+        <a href="/recipe_books/new"> Create Recipe Book </a>
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.username %></p>
+
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login"> Sign In </a>
+      <%end %>
+
+    </nav>
+    <div class="container">
+      <%= yield %> 
+    </div>
+  </body>
+</html>
