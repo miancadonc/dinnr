@@ -2,7 +2,12 @@
 
 <% RecipeBook.all.each do |book| %>
     <ul>
-        <li><a href="/recipe-books/<%=book.id%>"><%= book.name %></a></li>
+        <li><a href="/recipe-books/<%=book.id%>"><%= book.name %></a>
+            <a href="/recipe-books/<%=book.id%>/edit">Edit This Book</a></br>
+            <form action="/recipe-books/<%= book.id%>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete This Book">
+            </li>
     </ul>
 <% end %>
 <a href='/recipe-books/new'>Create a New Recipe Book</a>

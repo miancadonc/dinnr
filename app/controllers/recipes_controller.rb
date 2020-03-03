@@ -31,6 +31,8 @@ class RecipesController < ApplicationController
     end
 
     delete '/recipes/:id' do
-        'delete recipe, redirect to index'
+        @recipe = Recipe.find(params[:id])
+        @recipe.destroy
+        redirect "/users/#{current_user.id}/show"
     end
 end

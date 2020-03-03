@@ -24,11 +24,16 @@ class RecipeBooksController < ApplicationController
     end
 
     get '/recipe-books/:id/edit' do
-        'load edit form, save updated @id'
+        @recipe_book = RecipeBook.find(params[:id])
+        erb :'recipe_books/edit'
     end
 
     patch '/recipe-books/:id' do
-        'in controller, update attributes. pull up index (redirect to /recipe-books)'
+        @recipe_book = RecipeBook.find(params[:id])
+        @recipe_book.name = params[:name]
+        @recipe_book.description = params[:description]
+        @recipe_book.save
+        redirect to "/users/#{current_user.id}/show"
     end
 
     delete '/recipe-books/:id' do

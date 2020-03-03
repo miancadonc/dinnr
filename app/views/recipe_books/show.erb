@@ -1,10 +1,16 @@
+<h1>Here are your saved recipes for this book so far:</h1>
 <% Recipe.all.each do |recipe| %>
     <ul>
-        <li><a href=<%=recipe.url_location%>><%= recipe.name %></a></li>
+        <li><a href=<%=recipe.url_location%>><%= recipe.name %></a>
+        <form action="/recipes/<%= recipe.id%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+
+        <input type="submit" value="Delete Recipe">
+        </form></li>
     </ul>
 <% end %>
 
-<h1>Create a New Recipe</h1>
+<h3>Create a New Recipe</h3>
 
 <form action="/recipes" method="post">
 <p>Name: <input type="text" name="name"></p>
