@@ -19,7 +19,8 @@ class RecipeBooksController < ApplicationController
     end
 
     get '/recipe-books/:id' do
-        'load show file with @id'
+        @book = RecipeBook.find(params[:id])
+        erb :'recipe_books/show'
     end
 
     get '/recipe-books/:id/edit' do

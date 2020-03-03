@@ -1,2 +1,17 @@
+<% Recipe.all.each do |recipe| %>
+    <ul>
+        <li><a href=<%=recipe.url_location%>><%= recipe.name %></a></li>
+    </ul>
+<% end %>
 
-<a href='/recipes/new'>Create a New Recipe</a>
+<h1>Create a New Recipe</h1>
+
+<form action="/recipes" method="post">
+<p>Name: <input type="text" name="name"></p>
+<p>Link: <input type="text" name="url_location"></p>
+<p>Recipe Book ID: <input type="text" name="recipe_book_id" placeholder=<%=@book.id%>></p>
+<input type='submit' value='Create'>
+</form>
+
+
+<a href="/users/<%=current_user.id%>/show">Return to Your Homepage</a>

@@ -5,11 +5,17 @@ class RecipesController < ApplicationController
     end
 
     get '/recipes/new' do
-        'recipes creation form'
+        erb :'recipes/new'
     end
 
     post '/recipes' do
-        'validate, create recipe from params, pull up index'
+        if params[:name] == '' || params[:url_location] == ''
+            erb :'recipes/new'
+        else
+            recipe = Recipe.create(params)
+         
+            redirect "/users/#{current_user.id}/show"
+        end
     end
 
     get '/recipes/:id' do
