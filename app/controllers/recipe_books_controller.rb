@@ -5,11 +5,17 @@ class RecipeBooksController < ApplicationController
     end
 
     get '/recipe-books/new' do
-        'recipe-books creation form'
+        erb :'recipe_books/new'
     end
 
     post '/recipe-books' do
-        'validate, create book from params, pull up index'
+        if params[:name] == '' || params[:description] == ''
+            erb :'recipe_books/new'
+        else
+            book = RecipeBook.create(params)
+            book.user_id = current_user.id
+            redirect "/users/#{current_user.id}/show"
+        end
     end
 
     get '/recipe-books/:id' do
