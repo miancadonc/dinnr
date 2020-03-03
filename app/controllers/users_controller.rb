@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       else
         @user = User.create(:username => params[:username], :password => params[:password])
         session[:user_id] = @user.id
-        redirect '/'
+        redirect "/users/#{current_user.id}/show"
       end
     end
 
