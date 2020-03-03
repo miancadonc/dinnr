@@ -1,0 +1,10 @@
+<h1>Welcome, <%=current_user.username%>. Here are your recipe books:</h1>
+
+<% current_user.recipe_books.each do |book| %>
+    <ul>
+        <li><a href="/recipe-books/<%=book.id%>"><%= book.name %></a></li>
+    </ul>
+<% end %>
+<a href='/recipe-books/new'>Create a New Recipe Book</a>
+<a href='/recipes/new'>Create a New Recipe</a>
+<a href='/logout'>Logout</a>

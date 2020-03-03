@@ -20,11 +20,7 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-      if !logged_in?
         erb :'users/login'
-      else
-        "You're already signed in!"
-      end
     end
 
     post '/login' do
@@ -33,8 +29,7 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         redirect "/users/#{user.id}/show"
       else
-        @signup_error = "Sorry, user not found. Please sign up here:"
-        erb :'users/signup'
+        redirect "/signup"
       end
     end
 
@@ -46,6 +41,11 @@ class UsersController < ApplicationController
         @login_error = "User not found. Please log in or sign up:"
         erb :index
       end
+    end
+
+    get "/logout" do
+      session.clear
+      redirect "/"
     end
 
 end
