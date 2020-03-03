@@ -1,6 +1,6 @@
 <h1>Create a New Account</h1>
 <% if !@signup_error.nil? %>
-<%= signup_error %>
+<p><%= @signup_error %></p>
 <% end %>
 
 <form action="/signup" method="post">
