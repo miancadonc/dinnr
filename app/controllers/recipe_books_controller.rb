@@ -37,6 +37,8 @@ class RecipeBooksController < ApplicationController
     end
 
     delete '/recipe-books/:id' do
-        'IF NEEDED ONLY delete recipe book, redirect to index'
+        @recipe_book = RecipeBook.find(params[:id])
+        @recipe_book.destroy
+        redirect "/users/#{current_user.id}/show"
     end
 end
