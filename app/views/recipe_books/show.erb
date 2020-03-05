@@ -1,4 +1,6 @@
-<h1>Here are your saved recipes for this book so far:</h1>
+<h1><%=@book.name%></h1>
+<h3><%=@book.description%></h3>
+<h3>Here are your saved recipes for <%=@book.name%>:</h3>
 <% @book.recipes.all.each do |recipe| %>
     <ul>
         <li><a href=<%=recipe.url_location%>><%= recipe.name %></a>
@@ -20,4 +22,4 @@
 </form>
 
 
-<a href="/users/<%=current_user.id%>/show">Return to Your Homepage</a>
+<a href="/users/<%=current_user.id%>">Return to Your Homepage</a>
