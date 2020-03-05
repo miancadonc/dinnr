@@ -2,8 +2,8 @@
 <h2>Current Name: <%= @recipe_book.name%></h2>
 
 <form action="/recipe-books/<%=@recipe_book.id%>" method="post">
-<p>Name: <input type="text" name="name"></p>
-<p>Description: <input type="text" name="description"></p>
+<p>Name: <input type="text" name="name" value="<%=@recipe_book.name%>"></p>
+<p>Description: <textarea type="text" name="description" ><%=@recipe_book.description%></textarea></p>
 <input type='submit' value='Save'>
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 </form>

@@ -5,6 +5,7 @@ class RecipeBooksController < ApplicationController
     end
 
     get '/recipe-books/new' do
+        redirect_if_not_logged_in
         erb :'recipe_books/new'
     end
 
@@ -12,9 +13,11 @@ class RecipeBooksController < ApplicationController
         if params[:name] == '' || params[:description] == ''
             erb :'recipe_books/new'
         else
-            book = RecipeBook.create(params)
-            book.user_id = current_user.id
-            redirect "/users/#{current_user.id}/show"
+            # book = RecipeBook.create(params)
+            # book.user_id = current_user.id
+            # book.save
+            current_user.recipe_books.create(params)
+            redirect "/users/#{current_user.id}"
         end
     end
 
@@ -25,6 +28,7 @@ class RecipeBooksController < ApplicationController
 
     get '/recipe-books/:id/edit' do
         @recipe_book = RecipeBook.find(params[:id])
+        redirect_if_not_authorized(@recipe_book.user_id)
         erb :'recipe_books/edit'
     end
 
@@ -33,12 +37,12 @@ class RecipeBooksController < ApplicationController
         @recipe_book.name = params[:name]
         @recipe_book.description = params[:description]
         @recipe_book.save
-        redirect to "/users/#{current_user.id}/show"
+        redirect to "/users/#{current_user.id}"
     end
 
     delete '/recipe-books/:id' do
         @recipe_book = RecipeBook.find(params[:id])
         @recipe_book.destroy
-        redirect "/users/#{current_user.id}/show"
+        redirect "/users/#{current_user.id}"
     end
 end

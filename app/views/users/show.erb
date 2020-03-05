@@ -1,6 +1,6 @@
 <h1>Welcome, <%=current_user.username%>. Here are your recipe books:</h1>
 
-<% RecipeBook.all.each do |book| %>
+<% current_user.recipe_books.all.each do |book| %>
     <ul>
         <li><a href="/recipe-books/<%=book.id%>"><%= book.name %></a>
             <a href="/recipe-books/<%=book.id%>/edit">Edit This Book</a></br>

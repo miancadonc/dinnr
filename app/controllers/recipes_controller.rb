@@ -14,7 +14,7 @@ class RecipesController < ApplicationController
         else
             recipe = Recipe.create(params)
          
-            redirect "/users/#{current_user.id}/show"
+            redirect "/users/#{current_user.id}"
         end
     end
 
@@ -33,6 +33,6 @@ class RecipesController < ApplicationController
     delete '/recipes/:id' do
         @recipe = Recipe.find(params[:id])
         @recipe.destroy
-        redirect "/users/#{current_user.id}/show"
+        redirect "/users/#{current_user.id}"
     end
 end

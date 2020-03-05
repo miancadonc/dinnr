@@ -1,5 +1,5 @@
 <h1>Here are your saved recipes for this book so far:</h1>
-<% Recipe.all.each do |recipe| %>
+<% @book.recipes.all.each do |recipe| %>
     <ul>
         <li><a href=<%=recipe.url_location%>><%= recipe.name %></a>
         <form action="/recipes/<%= recipe.id%>" method="post">
@@ -15,7 +15,7 @@
 <form action="/recipes" method="post">
 <p>Name: <input type="text" name="name"></p>
 <p>Link: <input type="text" name="url_location"></p>
-<p>Recipe Book ID: <input type="text" name="recipe_book_id" placeholder=<%=@book.id%>></p>
+<input type="hidden" name="recipe_book_id" value=<%=@book.id%>>
 <input type='submit' value='Create'>
 </form>
 
