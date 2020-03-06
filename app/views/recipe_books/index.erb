@@ -1,0 +1,5 @@
+<% RecipeBook.all.each do |book| %>
+    <ul>
+        <li><a href="/recipe-books/<%= book.id%>"><%= book.name%></a>
+    </ul>
+<% end %>

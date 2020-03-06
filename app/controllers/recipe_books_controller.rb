@@ -1,7 +1,8 @@
 class RecipeBooksController < ApplicationController
 
     get '/recipe-books' do
-        'recipe_books index'
+        #redirect "/users/#{current_user.id}"
+        erb :'recipe_books/index'
     end
 
     get '/recipe-books/new' do
@@ -34,14 +35,20 @@ class RecipeBooksController < ApplicationController
 
     patch '/recipe-books/:id' do
         @recipe_book = RecipeBook.find(params[:id])
-        @recipe_book.name = params[:name]
-        @recipe_book.description = params[:description]
-        @recipe_book.save
-        redirect to "/users/#{current_user.id}"
+        if params[:name] == '' || params[:description] == ''
+            redirect "/recipe-books/#{@recipe_book.id}/edit"
+        else
+            redirect_if_not_authorized(@recipe_book.user_id)
+            @recipe_book.name = params[:name]
+            @recipe_book.description = params[:description]
+            @recipe_book.save
+            redirect to "/users/#{current_user.id}"
+        end
     end
 
     delete '/recipe-books/:id' do
         @recipe_book = RecipeBook.find(params[:id])
+        redirect_if_not_authorized(@recipe_book.user_id)
         @recipe_book.destroy
         redirect "/users/#{current_user.id}"
     end
